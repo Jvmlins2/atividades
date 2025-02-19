@@ -1,0 +1,25 @@
+//comentario de uma inha
+/* 
+comentario de
+varias linhas
+*/
+/*
+autor:João Vitor
+nome do programa:hello world
+descrição:primeiro codigo em arduino.Pisca o pino 13
+data:19/02/2025
+*/
+void setup()//inicia o arduino
+{
+ pinMode(13,OUTPUT);
+ //define o pino 13 como saida
+}
+
+
+void loop()//após o up o programa fica em loop
+{
+  digitalWrite(13,HIGH);//aciona o pino 13
+  delay(1000);//aguarda 1000ms (1s)
+  digitalWrite(13,LOW);//desaciona o pino 13
+  delay(1000);//aguarda 1000ms
+}

@@ -1,0 +1,57 @@
+#define pinLEDVerde 11
+#define pinLEDAmarelo 12
+#define pinLEDVermelho 13
+#define tempoVermelho 5000
+#define tempoAmarelo 2000
+#define tempoVerde 3000
+#define pinLEDAmarelo2 10
+#define pinLEDVerde2 9
+#define pinLEDVermelho2 8
+#define pinLEDVermelho3 7
+#define pinLEDVerde3 6
+void setup()
+{
+  pinMode(pinLEDVerde,OUTPUT);
+  pinMode (pinLEDAmarelo,OUTPUT);
+  pinMode (pinLEDVermelho,OUTPUT);
+  pinMode (pinLEDVerde2,OUTPUT);
+  pinMode (pinLEDVermelho2, OUTPUT);
+  pinMode (pinLEDVerde3, OUTPUT);
+  pinMode (pinLEDAmarelo2,OUTPUT);
+  pinMode (pinLEDVermelho3, OUTPUT);
+}
+
+void loop()
+{
+  digitalWrite(pinLEDVermelho,HIGH),digitalWrite(pinLEDVerde2,HIGH),digitalWrite (pinLEDVermelho3,HIGH);
+  delay(3000);
+  digitalWrite(pinLEDVerde2,LOW);
+  delay(100); 
+  digitalWrite (pinLEDAmarelo2,HIGH);
+  delay(tempoAmarelo);
+  digitalWrite(pinLEDAmarelo2, LOW), digitalWrite(pinLEDVermelho,LOW);
+  digitalWrite (pinLEDVerde, HIGH),digitalWrite(pinLEDVermelho2,HIGH);
+  delay (tempoVerde);
+  digitalWrite (pinLEDVerde, LOW);
+  delay (100);
+ digitalWrite (pinLEDAmarelo, HIGH);
+delay (tempoAmarelo);
+digitalWrite (pinLEDAmarelo, LOW),digitalWrite (pinLEDVermelho,HIGH),digitalWrite (pinLEDVerde3, HIGH),digitalWrite (pinLEDVermelho3,LOW);
+delay (3000);
+  digitalWrite (pinLEDVerde3, LOW);
+  digitalWrite (pinLEDVermelho3,HIGH);
+  delay(300);
+  digitalWrite (pinLEDVermelho3,LOW);
+  delay(300);
+  digitalWrite (pinLEDVermelho3,HIGH);
+  delay(300);
+  digitalWrite (pinLEDVermelho3,LOW);
+  delay(300);
+  digitalWrite(pinLEDVermelho3,LOW);
+  delay(300);
+  digitalWrite (pinLEDVermelho3,HIGH);
+  delay(300);
+  digitalWrite (pinLEDVermelho3,LOW);
+  digitalWrite (pinLEDVermelho,LOW),digitalWrite (pinLEDVermelho2,LOW);
+   delay(100);
+}

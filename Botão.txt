@@ -1,0 +1,23 @@
+#define pinBotao 10
+#define pinLED 13
+unsigned long contagem = 0;
+void setup()
+{
+ pinMode(pinBotao,INPUT);
+ pinMode(pinLED, OUTPUT);
+  unsigned long contagem = 0;
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  static bool estadoAnteriorBotao = 0;
+  bool estadoAtualBotao = (digitalRead(pinBotao));
+  if (estadoAtualBotao && !estadoAnteriorBotao)
+  {
+   contagem++;
+   Serial.println(contagem);
+  }
+ 
+  estadoAnteriorBotao = estadoAtualBotao;
+}

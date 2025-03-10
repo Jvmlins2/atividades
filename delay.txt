@@ -1,0 +1,51 @@
+#define pinLedAmarelo 12
+#define pinLedVerde 13
+#define pinLedVermelho 11
+#define tempopisca 1000
+char fasesemaforo = 0;
+unsigned long tempoAtual;
+unsigned long tempoInicial = 0;
+bool estadoLedVermelho=0;
+bool estadoLedVerde=0;
+bool estadoLedAmarelo=0;
+
+void setup()
+{
+  pinMode(pinLedVermelho, OUTPUT);
+  pinMode(pinLedVerde, OUTPUT);
+  pinMode(pinLedAmarelo, OUTPUT);
+  Serial.begin(9600);
+  
+ 
+}
+
+void loop() 
+{
+  tempoAtual = millis();
+  if(tempoAtual-tempoInicial>=2000 && fasesemaforo == 0)
+  {
+  digitalWrite(pinLedVerde, LOW); 
+  digitalWrite(pinLedAmarelo, LOW);
+  digitalWrite(pinLedVermelho, HIGH);
+  tempoInicial=tempoAtual;
+  fasesemaforo = 1;
+  }
+  
+  else if(tempoAtual-tempoInicial>=5000 && fasesemaforo == 1)
+  {
+  digitalWrite(pinLedVermelho, LOW);
+  digitalWrite(pinLedAmarelo, LOW);
+  digitalWrite(pinLedVerde, HIGH);
+  tempoInicial = tempoAtual;
+  fasesemaforo = 2;
+  }
+  
+  else if(tempoAtual-tempoInicial>=3000 && fasesemaforo == 2)
+  {
+  digitalWrite(pinLedVermelho, LOW);
+  digitalWrite(pinLedVerde, LOW); 
+  digitalWrite(pinLedAmarelo,HIGH );
+  tempoInicial = tempoAtual;
+  fasesemaforo = 0;
+ }
+}

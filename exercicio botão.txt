@@ -1,0 +1,64 @@
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27,16,2);
+const int pinLed1 = 13;
+const int pinBotao1 = 8;
+const int pinLed2 = 12;
+const int pinBotao2 = 9;
+const int pinLed3 = 11;
+const int pinBotao3 = 10;
+void setup()
+{
+  pinMode (pinLed1,OUTPUT);
+  pinMode(pinBotao1, INPUT);
+  pinMode(pinLed2, OUTPUT);
+  pinMode(pinBotao2, INPUT);
+  pinMode (pinLed3,OUTPUT);
+  pinMode(pinBotao3, INPUT);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0,0);//lcd.home(); faz a mesma coisa
+}
+
+void loop()
+{  
+ bool estadoBotao1 =(digitalRead(pinBotao1));
+ static bool estadoAnteriorBotao1 = 0;
+ static bool estadoLed1 = 0;
+ bool estadoBotao2 = (digitalRead(pinBotao2));
+ static bool estadoAnteriorBotao2 = 0;
+ static bool estadoLed2 = 0;
+ bool estadoBotao3 = (digitalRead(pinBotao3));
+ static bool estadoAnteriorBotao3 = 0;
+ static bool estadoLed3 = 0;
+  if(estadoBotao1 == 1)
+  {
+   
+   digitalWrite(pinLed2, LOW);
+   digitalWrite(pinLed3, LOW);
+   digitalWrite(pinLed1, HIGH);
+   estadoLed1 = !estadoLed1;
+   lcd.setCursor(6,0);
+   lcd.print ("LED 1 LIGADO");
+   
+  }else if(estadoBotao2 == 1)
+  {
+   
+   digitalWrite(pinLed1,LOW);
+   digitalWrite(pinLed3, LOW);
+   digitalWrite(pinLed2, HIGH);
+   estadoLed2 = !estadoLed2;
+   lcd.setCursor(6,0);
+   lcd.print ("LED 2 LIGADO");
+  }else if (estadoBotao3 == 1)
+  {
+   digitalWrite(pinLed1,LOW);
+   digitalWrite(pinLed2,LOW);
+   digitalWrite(pinLed3,HIGH);
+   estadoLed3 =!estadoLed3;
+   lcd.setCursor(6,0);
+   lcd.print ("LED 3 LIGADO");
+  }
+  estadoLed1 = !estadoLed1;
+  estadoLed2=!estadoLed2;
+}

@@ -1,0 +1,79 @@
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd (0x27, 16, 2);
+#define pinLedVermelho 8
+#define pinLedVerde 9
+//0, 145, 329, 505, 741
+static bool estadoLedVerde = 0;
+static bool estadoLedVermelho = 0;
+static bool cursor = 0;
+void setup()
+{
+ lcd.init();
+ lcd.backlight();
+ Serial.begin(9600);
+ pinMode(pinLedVermelho, OUTPUT);
+ pinMode(pinLedVerde, OUTPUT);
+ lcd.setCursor(4,0);
+ lcd.print(">");
+ lcd.setCursor(6,0);
+ lcd.print("LED 1 OFF");
+ lcd.setCursor(6,1);
+ lcd.print("LED 2 OFF");
+}
+
+void loop()
+{
+ Serial.println(analogRead(A0));
+ delay(500);
+ int valorBotao = analogRead(A0);
+ static int valorAnteriorBotao = 1023;
+ if (valorAnteriorBotao == 1023 && valorBotao == 0)
+ {
+  lcd.setCursor(4,1);
+  lcd.print(">");
+  lcd.setCursor(4,0);
+  lcd.print(" ");
+  cursor = !cursor;
+ }else if (valorAnteriorBotao == 1023 && valorBotao >= 145 * 0.9 
+           && valorBotao <= 145 * 1.1)
+ {
+  lcd.setCursor(4,0);
+  lcd.print(">");
+  lcd.setCursor(4,1);
+  lcd.print(" ");
+  cursor = !cursor;
+ }else if (valorAnteriorBotao == 1023 && valorBotao >= 329 * 0.9 
+           && valorBotao <= 329 * 1.1)
+ {
+  
+ }else if (valorAnteriorBotao == 1023 && valorBotao >= 505 * 0.9 
+           && valorBotao <= 505 * 1.1)
+ {
+  
+ }else if (valorAnteriorBotao == 1023 && valorBotao >= 741 * 0.9 
+           && valorBotao <= 741 * 1.1)
+ {
+ if(!cursor) estadoLedVerde = !estadoLedVerde;
+   else estadoLedVermelho = !estadoLedVermelho;
+   if (estadoLedVerde == 0)
+  {
+   lcd.setCursor(6,0);
+   lcd.print("LED 1 OFF");
+   digitalWrite(pinLedVerde,LOW);
+ }else  
+ {
+   lcd.setCursor(6,0);
+   lcd.print("LED 1 ON ");
+   digitalWrite(pinLedVerde,HIGH);
+  } if(estadoLedVermelho == 0)
+  {
+  lcd.setCursor(6,1);
+   lcd.print("LED 2 OFF");
+   digitalWrite(pinLedVermelho,LOW);
+} else 
+ {
+   lcd.setCursor(6,1);
+   lcd.print("LED 2 ON ");
+   digitalWrite(pinLedVermelho,HIGH);
+  }
+}

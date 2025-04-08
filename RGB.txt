@@ -1,0 +1,24 @@
+
+struct rgb
+{
+ char r;
+ char g;
+ char b;
+};
+ rgb azul;
+ rgb amarelo;
+ rgb vermelho;
+void setup()
+{
+ Serial.begin(9600);
+ azul.r  = 68;
+ azul.g = 64;
+ azul.b = 218;
+
+ amarelo.r = 244;
+ amarelo.g = 222;
+ amarelo.b = 41;
+
+vermelho.r = 250;
+vermelho.g = 13;
+vermelho.b = 13;

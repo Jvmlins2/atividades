@@ -1,0 +1,54 @@
+# include <Arduino.h>
+# include <Wire.h>
+# include <SparkFun_APDS9960.h>
+SparkFun_APDS9960 apds = SparkFun_APDS9960();
+
+void controleGesto();
+void setup()
+{
+  
+  Serial.begin(9600);
+  if (apds.init())
+  {
+    Serial.println(F("APDS-9960: Inicialização bem-sucedida"));
+  }
+  else
+  {
+    Serial.println(F("APDS-9960: Algo deu errado durante a inicialização"));
+  }
+  if (apds.enableGestureSensor(true))
+  {
+    Serial.println(F("O sensor de gestos está funcionando!"));
+  }
+  else
+  {
+    Serial.println(F("Algo deu errado durante a inicialização do sensor de gestos!"));
+  }
+}
+void loop()
+{
+  controleGesto();
+}
+void controleGesto()
+{
+  if (apds.isGestureAvailable())
+  {
+    
+    switch (apds.readGesture())
+    {
+    case DIR_UP:
+      Serial.println("CIMA");
+      break;
+    case DIR_DOWN:
+      Serial.println("BAIXO");
+      break;
+    case DIR_LEFT:
+      Serial.println("ESQUERDA");
+      break;
+    case DIR_RIGHT:
+      Serial.println("DIREITA");
+      break;
+    }
+    delay(300);
+  }
+}

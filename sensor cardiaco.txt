@@ -1,0 +1,48 @@
+# include <Arduino.h>
+# include <Wire.h>
+# include "MAX30105.h"
+
+# include "heartRate.h"
+
+MAX30105 particleSensor;
+
+unsigned long lastBeat = 0;
+
+int batimentoPorMinuto;
+
+
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("Inicializando...");
+
+  if (!particleSensor.begin(Wire, I2C_SPEED_FAST)) //Use default I2C port, 400kHz speed
+  {
+    Serial.println("MAX30105 nao foi encontrado. Por favor tente denovo. ");
+    while (1);
+  }
+  Serial.println("Coloque e pressione seu dedo no sensor.");
+
+  particleSensor.setup();
+  particleSensor.setPulseAmplitudeRed(0x0A);
+}
+
+void loop()
+{
+  int Valorif = particleSensor.getIR();
+  int beatsPerMinute;
+  if (checkForBeat(Valorif) == true)
+  {
+ unsigned long delta = millis() - lastBeat;
+
+
+    beatsPerMinute = 60 / (delta / 1000.0);
+
+    if (beatsPerMinute < 255 && beatsPerMinute > 20)
+    {
+      Serial.println(beatsPerMinute);
+    }
+
+    lastBeat = millis();
+  }
+}
